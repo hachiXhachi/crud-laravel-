@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
-use Nette\Utils\Html;
 class ProductController extends Controller
 {
     public function index()
@@ -19,7 +18,7 @@ class ProductController extends Controller
         return datatables()
             ->of($query)
             ->addColumn('action', function ($product) {
-                return '<button class="btn btn-primary" onclick="window.location.href=\''. route("product.edit", ["product" => $product->id]) .'\'">Edit Product</button>';
+                return '<button class="btn btn-primary btn-lg show" style="vertical-align: middle;" onclick="window.location.href=\''. route("product.edit", ["product" => $product->id]) .'\'">Edit Product</button>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -47,5 +46,19 @@ class ProductController extends Controller
     public function edit(Products $product)
     {
         return view('products.edit', ['product' => $product]);
+    }
+
+    public function update(Products $product, Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'qty' => 'required|numeric',
+            'price' => 'required|numeric',
+            'description' => 'nullable'
+        ]);
+
+        $product->update($data);
+
+        return redirect()->route('product.index')->with('Success','Product Updated!');
     }
 }
