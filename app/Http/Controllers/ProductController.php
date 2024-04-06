@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Products;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class ProductController extends Controller
 {
     public function index()
@@ -11,6 +13,27 @@ class ProductController extends Controller
         return view('products.index');
     }
 
+    public function signup()
+    {
+        return view('signup');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:3|',
+        ]);
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect('/')->with('success', 'Registration successful. You can now login.');
+    }
     public function datatables(Request $request)
     {
         $query = Products::select(['id', 'name', 'qty', 'price', 'description']);
