@@ -6,12 +6,35 @@ use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
+
 class ProductController extends Controller
 {
     public function index()
     {
         return view('products.index');
     }
+    
+
+    public function verify(Request $request): RedirectResponse
+    {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+
+            return redirect()->intended('product');
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
+    }
+
 
     public function signup()
     {
@@ -41,7 +64,7 @@ class ProductController extends Controller
         return datatables()
             ->of($query)
             ->addColumn('action', function ($product) {
-                return '<button class="btn btn-primary btn-lg show" style="vertical-align: middle;" onclick="window.location.href=\''. route("product.edit", ["product" => $product->id]) .'\'">Edit Product</button>';
+                return '<button class="btn btn-primary btn-lg show" style="vertical-align: middle;" onclick="window.location.href=\'' . route("product.edit", ["product" => $product->id]) . '\'">Edit Product</button>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -82,6 +105,12 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('product.index')->with('Success','Product Updated!');
+        return redirect()->route('product.index')->with('Success', 'Product Updated!');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/login')->with('success', 'You have been logged out.');
     }
 }

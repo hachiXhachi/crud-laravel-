@@ -49,13 +49,17 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/sign-in.html">
+          <a class="nav-link text-white" href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="material-icons opacity-10">login</i>
+              <i class="material-icons opacity-10">logout</i>
             </div>
-            <span class="nav-link-text ms-1">Sign In</span>
+            <span class="nav-link-text ms-1">Logout</span>
           </a>
         </li>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+
         <li class="nav-item">
           <a class="nav-link text-white " href="../pages/sign-up.html">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
@@ -90,7 +94,7 @@
 
             <li class="nav-item d-flex align-items-center">
               <a href="{{route('product.create')}}" class="nav-link text-body font-weight-bold px-0">
-              <i class="fa-regular fa-square-plus"></i>
+                <i class="fa-regular fa-square-plus"></i>
                 <span class="d-sm-inline d-none">Add Product</span>
               </a>
             </li>
@@ -100,30 +104,30 @@
     </nav>
     <!-- End Navbar -->
 
-      <div class="col-12">
-        <div class="card my-4">
-          <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-              <h6 class="text-white text-capitalize ps-3">Product table</h6>
-            </div>
+    <div class="col-12">
+      <div class="card my-4">
+        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+          <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
+            <h6 class="text-white text-capitalize ps-3">Product table</h6>
           </div>
-          <table class="table table-striped dt-responsive cell-border nowrap"id="productTable">
-            <thead>
-              <tr>
-                <th class="text-uppercase text-secondary text-center">Id</th>
-                <th class="text-uppercase text-secondary text-center">Name</th>
-                <th class="text-uppercase text-secondary text-center">Qty</th>
-                <th class="text-uppercase text-secondary text-center">Price</th>
-                <th class="text-uppercase text-secondary text-center">Description</th>
-                <th class="text-uppercase text-secondary text-center">Action</th>
-              </tr>
-            <tbody></tbody>
-            </thead>
-          </table>
-
-
         </div>
+        <table class="table table-striped dt-responsive cell-border nowrap" id="productTable">
+          <thead>
+            <tr>
+              <th class="text-uppercase text-secondary text-center">Id</th>
+              <th class="text-uppercase text-secondary text-center">Name</th>
+              <th class="text-uppercase text-secondary text-center">Qty</th>
+              <th class="text-uppercase text-secondary text-center">Price</th>
+              <th class="text-uppercase text-secondary text-center">Description</th>
+              <th class="text-uppercase text-secondary text-center">Action</th>
+            </tr>
+          <tbody></tbody>
+          </thead>
+        </table>
+
+
       </div>
+    </div>
 
     <footer class="footer py-4  ">
       <div class="container-fluid">
@@ -176,7 +180,7 @@
         autoWidth: true,
         processing: true,
         serverSide: true,
-        autoWidth: true,  
+        autoWidth: true,
         ajax: '{{ route("product.datatables") }}',
         columns: [{
             data: 'id',
@@ -206,41 +210,51 @@
         columnDefs: [{
             "targets": 0,
             "createdCell": function(td, cellData, rowData, row, col) {
-              $(td).css({'width': '5%', 
+              $(td).css({
+                'width': '5%',
                 'vertical-align': 'middle',
-                      'text-align':'center'});
+                'text-align': 'center'
+              });
             }
           },
           {
             "targets": 1,
             "createdCell": function(td, cellData, rowData, row, col) {
-              $(td).css({'width': '20%', 
+              $(td).css({
+                'width': '20%',
                 'vertical-align': 'middle',
-                      'text-align':'center'});
+                'text-align': 'center'
+              });
             }
           },
           {
             "targets": 2,
             "createdCell": function(td, cellData, rowData, row, col) {
-              $(td).css({'width': '20%', 
+              $(td).css({
+                'width': '20%',
                 'vertical-align': 'middle',
-                      'text-align':'center'});
+                'text-align': 'center'
+              });
             }
           },
           {
             "targets": 3,
             "createdCell": function(td, cellData, rowData, row, col) {
-              $(td).css({'width': '20%',
-                'vertical-align': 'middle', 
-                      'text-align':'center'});
+              $(td).css({
+                'width': '20%',
+                'vertical-align': 'middle',
+                'text-align': 'center'
+              });
             }
           },
           {
             "targets": 4,
             "createdCell": function(td, cellData, rowData, row, col) {
-              $(td).css({'width': '40%', 
+              $(td).css({
+                'width': '40%',
                 'vertical-align': 'middle',
-                      'text-align':'center'});
+                'text-align': 'center'
+              });
             }
           },
           {
@@ -262,8 +276,8 @@
       });
       var table = $('#productTable').DataTable();
       $('#customSearchInput').on('keyup', function() {
-      table.search(this.value).draw();
-    });
+        table.search(this.value).draw();
+      });
     });
 
     var win = navigator.platform.indexOf('Win') > -1;
