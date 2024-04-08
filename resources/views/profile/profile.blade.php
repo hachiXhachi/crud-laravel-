@@ -84,7 +84,7 @@
                 <div class="row gx-4 mb-2">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="data:image/jpeg;base64,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" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                            <img src="{{ asset('storage/' . $user->pfp) }}" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
@@ -111,7 +111,6 @@
                                 </div>
                                 <div class="card-body p-3">
                                     <p class="text-sm" style="text-align: justify;">
-                                        Hi, I’m {{$user->name}}, 
                                         {{$user->description}}
                                     </p>
                                     <hr class="horizontal gray-light my-4">
@@ -141,7 +140,7 @@
                             </div>
                         </div>
                         <div class="col-md-4 text-end">
-                            <a href="{{route('user.edit',["id" => $user->id])}}">
+                            <a href="{{route('user.edit',["id" => $user->id])}}" value="Edit Profile">
                                 <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Profile"></i>
                             </a>
                         </div>

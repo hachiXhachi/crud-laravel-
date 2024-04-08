@@ -21,23 +21,27 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header">
-                                    <h4 class="font-weight-bolder">Products</h4>
-                                    <p class="mb-0">Edit products</p>
+                                    <h4 class="font-weight-bolder">User Profile</h4>
+                                    <p class="mb-0">Edit Profile</p>
                                 </div>
                                 <div style="text-align: center; font-size: 12px;">
-                                            @if($errors->any())
-                                            @foreach($errors->all() as $error)
-                                            <p>{{$error}}</p>
-                                            @endforeach
-                                            @endif
-                                        </div>
+                                    @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                    <p>{{$error}}</p>
+                                    @endforeach
+                                    @endif
+                                </div>
                                 <div class="card-body">
-                                    <form role="form" action="{{ route('user.update', ['user' => $user]) }}" method="post">
+                                    <form role="form" action="{{ route('user.update', ['user' => $user]) }}" method="post" enctype="multipart/form-data">
                                         @csrf
                                         @method('put')
                                         <div class="input-group input-group-outline mb-3 is-filled">
                                             <label class="form-label">Name</label>
                                             <input type="text" name="name" value="{{$user->name}}" class="form-control">
+                                        </div>
+                                        <div class="input-group input-group-outline mb-3 is-filled">
+                                            <label class="form-label">Change Picture</label>
+                                            <input type="file" name="picture" class="form-control">
                                         </div>
                                         <div class="input-group input-group-outline mb-3 is-filled">
                                             <label class="form-label">Email</label>

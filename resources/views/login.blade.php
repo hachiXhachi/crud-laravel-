@@ -22,6 +22,13 @@
                                 </div>
                             </div>
                             <div class="card-body">
+                            <div style="text-align: center; font-size: 12px;">
+                                    @if($errors->any())
+                                    @foreach($errors->all() as $error)
+                                    <p>{{$error}}</p>
+                                    @endforeach
+                                    @endif
+                                </div>
                                 <form th:action="{{route('user.verify')}}" class="text-start" method="POST">
                                     @csrf
                                     @method('post')

@@ -126,9 +126,13 @@ class ProductController extends Controller
             'email' => 'required',
             'address' => 'required',
             'mobile_number' => 'required|numeric',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        if ($request->hasFile('picture')) {
+            $picturePath = $request->file('picture')->store('pictures', 'public');
+            $data['pfp'] = $picturePath;
+        }
         $user->update($data);
         return redirect()->route('user.profile')->with('Success', 'Product Updated!');
     }

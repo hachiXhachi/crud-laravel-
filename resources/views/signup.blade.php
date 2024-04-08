@@ -43,10 +43,10 @@
                                     <h4 class="font-weight-bolder">Sign Up</h4>
                                     <p class="mb-0">Enter your email and password to register</p>
                                 </div>
-                                <div>
+                                <div style="text-align: center; font-size: 12px;">
                                     @if($errors->any())
                                     @foreach($errors->all() as $error)
-                                    <h5>{{$error}}</h5>
+                                    <p>{{$error}}</p>
                                     @endforeach
                                     @endif
                                 </div>
