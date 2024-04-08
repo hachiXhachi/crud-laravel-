@@ -1,193 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Document</title>
-	<style>
-		@import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,600);
-
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-webkit-font-smoothing: antialiased;
-			-moz-font-smoothing: antialiased;
-			-o-font-smoothing: antialiased;
-			font-smoothing: antialiased;
-			text-rendering: optimizeLegibility;
-		}
-
-		body {
-			font-family: "Open Sans", Helvetica, Arial, sans-serif;
-			font-weight: 300;
-			font-size: 12px;
-			line-height: 30px;
-			color: #777;
-			background: #0CF;
-		}
-
-		.container {
-			max-width: 400px;
-			width: 100%;
-			margin: 0 auto;
-			position: relative;
-		}
-
-		#contact input[type="text"],
-		#contact input[type="email"],
-		#contact input[type="tel"],
-		#contact input[type="url"],
-		#contact textarea,
-		#contact button[type="submit"] {
-			font: 400 12px/16px "Open Sans", Helvetica, Arial, sans-serif;
-		}
-
-		#contact {
-			background: #F9F9F9;
-			padding: 25px;
-			margin: 50px 0;
-		}
-
-		#contact h3 {
-			color: #F96;
-			display: block;
-			font-size: 30px;
-			font-weight: 400;
-		}
-
-		#contact h4 {
-			margin: 5px 0 15px;
-			display: block;
-			font-size: 13px;
-		}
-
-		fieldset {
-			border: medium none !important;
-			margin: 0 0 10px;
-			min-width: 100%;
-			padding: 0;
-			width: 100%;
-		}
-
-		#contact input[type="text"],
-		#contact input[type="email"],
-		#contact input[type="tel"],
-		#contact input[type="url"],
-		#contact textarea {
-			width: 100%;
-			border: 1px solid #CCC;
-			background: #FFF;
-			margin: 0 0 5px;
-			padding: 10px;
-		}
-
-		#contact input[type="text"]:hover,
-		#contact input[type="email"]:hover,
-		#contact input[type="tel"]:hover,
-		#contact input[type="url"]:hover,
-		#contact textarea:hover {
-			-webkit-transition: border-color 0.3s ease-in-out;
-			-moz-transition: border-color 0.3s ease-in-out;
-			transition: border-color 0.3s ease-in-out;
-			border: 1px solid #AAA;
-		}
-
-		#contact textarea {
-			height: 100px;
-			max-width: 100%;
-			resize: none;
-		}
-
-		#contact button[type="submit"] {
-			cursor: pointer;
-			width: 100%;
-			border: none;
-			background: #0CF;
-			color: #FFF;
-			margin: 0 0 5px;
-			padding: 10px;
-			font-size: 15px;
-		}
-
-		#contact button[type="submit"]:hover {
-			background: #09C;
-			-webkit-transition: background 0.3s ease-in-out;
-			-moz-transition: background 0.3s ease-in-out;
-			transition: background-color 0.3s ease-in-out;
-		}
-
-		#contact button[type="submit"]:active {
-			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
-		}
-
-		#contact input:focus,
-		#contact textarea:focus {
-			outline: 0;
-			border: 1px solid #999;
-		}
-
-		::-webkit-input-placeholder {
-			color: #888;
-		}
-
-		:-moz-placeholder {
-			color: #888;
-		}
-
-		::-moz-placeholder {
-			color: #888;
-		}
-
-		:-ms-input-placeholder {
-			color: #888;
-		}
-	</style>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+	<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+	<title>
+		Sign-Up
+	</title>
+	@include('fragments.css.header')
 </head>
 
-<body>
+<body class="">
+	<main class="main-content dark-version mt-0">
+		<section>
+			<div class="page-header min-vh-100" >
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+							<div class="card card-plain">
+								<div class="card-header">
+									<h4 class="font-weight-bolder">Products</h4>
+									<p class="mb-0">Edit products</p>
+								</div>
+								<div>
+									@if($errors->any())
+									@foreach($errors->all() as $error)
+									<h5>{{$error}}</h5>
+									@endforeach
+									@endif
+								</div>
+								<div class="card-body">
+									<form role="form" action="{{route('product.update', ['product'=>$product])}}" method="post">
+										@csrf
+										@method('put')
+										<div>
+											@if($errors->any())
+											@foreach($errors->all() as $error)
+											<h5>{{$error}}</h5>
+											@endforeach
+											@endif
+										</div>
+										<div class="input-group input-group-outline mb-3 is-filled">
+											<label class="form-label">Name</label>
+											<input type="text" name="name" value="{{$product->name}}" class="form-control">
+										</div>
+										<div class="input-group input-group-outline mb-3 is-filled">
+											<label class="form-label">Quantity</label>
+											<input type="text" name="qty" id="qty" value="{{$product->qty}}" class="form-control">
+										</div>
 
-	<div class="container">
-
-		<form id="contact" action="{{route('product.update', ['product'=>$product])}}" method="post">
-
-			@csrf
-			@method('put')
-			<h3>Products</h3>
-			<h4>Edit products</h4>
-			<div>
-				@if($errors->any())
-				@foreach($errors->all() as $error)
-				<h5>{{$error}}</h5>
-				@endforeach
-				@endif
+										<div class="input-group input-group-outline mb-3 is-filled">
+											<label class="form-label">Price</label>
+											<input type="text" name="price" id="price"  value="{{$product->price}}" class="form-control">
+										</div>
+	
+										<div class="input-group input-group-outline mb-3 is-filled">
+											<label class="form-label">Description</label>
+											<input type="text" name="description" id="description" value="{{$product->description}}" class="form-control" >
+										</div>
+										<div class="text-center">
+											<button type="submit" class="btn btn-lg bg-gradient-primary btn-lg w-100 mt-4 mb-0">Update</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<fieldset>
-				<label for="">Name</label>
-				<input type="text" name="name" id="name" placeholder="Name" value="{{$product->name}}">
-			</fieldset>
-			<fieldset>
-				<label for="">Quantity</label>
-				<input type="text" name="qty" id="qty" placeholder="Quantity" value="{{$product->qty}}">
-			</fieldset>
-			<fieldset>
-				<label for="">Price</label>
-				<input type="text" name="price" id="price" placeholder="Price" value="{{$product->price}}">
-			</fieldset>
-			<fieldset>
-				<label for="">Description</label>
-				<input type="text" name="description" id="description" value="{{$product->description}}" placeholder="Description">
-			</fieldset>
-			<fieldset>
-				<button type="submit">Update</button>
-			</fieldset>
-		</form>
+		</section>
+	</main>
+	@include('fragments.js.js')
+	<script>
+		var win = navigator.platform.indexOf('Win') > -1;
+		if (win && document.querySelector('#sidenav-scrollbar')) {
+			var options = {
+				damping: '0.5'
+			}
+			Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+		}
+	</script>
 
-
-	</div>
 </body>
 
 </html>

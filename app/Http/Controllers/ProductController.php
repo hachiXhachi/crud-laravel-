@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
+
 
 class ProductController extends Controller
 {
@@ -16,7 +18,14 @@ class ProductController extends Controller
         return view('products.index');
     }
     
-
+    public function profile()
+    {   
+        // if (Auth::check()) {
+        //     $userId = auth()->id(); 
+        // }
+        $user = Auth::user();
+        return view('profile.profile',['user' => $user]);
+    }
     public function verify(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -34,8 +43,6 @@ class ProductController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
-
-
     public function signup()
     {
         return view('signup');
@@ -93,7 +100,11 @@ class ProductController extends Controller
     {
         return view('products.edit', ['product' => $product]);
     }
-
+    public function editProfile()
+    {
+        $user = Auth::user();
+        return view('profile.editprofile', ['user' => $user]);
+    }
     public function update(Products $product, Request $request)
     {
         $data = $request->validate([
@@ -105,7 +116,21 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        return redirect()->route('product.index')->with('Success', 'Product Updated!');
+        return redirect()->route('product.index')->with('success', 'Product Updated!');
+    }
+
+    public function storeProfile(User $user, Request $request)
+    {
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'mobile_number' => 'required|numeric',
+            'description' => 'nullable'
+        ]);
+
+        $user->update($data);
+        return redirect()->route('user.profile')->with('Success', 'Product Updated!');
     }
 
     public function logout()
