@@ -111,6 +111,6 @@ class ProductController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('/login')->with('success', 'You have been logged out.');
+        return redirect('/')->with('success', 'You have been logged out.');
     }
 }

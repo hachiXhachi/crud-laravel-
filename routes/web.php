@@ -5,10 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\middleware;
 Route::get('/', function () {
     return view('login');
-});
-Route::get('/login', function () {
-    return view('login');
-})->name('user.login'); 
+})->name('user.login');
+
 Route::get('/signup', [ProductController::class, 'signup'])->name('user.signup');
 Route::post('/signup', [ProductController::class, 'register'])->name('user.register');
 Route::post('/', [ProductController::class, 'verify'])->name('user.verify');
