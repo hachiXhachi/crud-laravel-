@@ -26,6 +26,7 @@ class ProductController extends Controller
         $user = Auth::user();
         return view('profile.profile',['user' => $user]);
     }
+
     public function verify(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
@@ -43,6 +44,7 @@ class ProductController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
     }
+
     public function signup()
     {
         return view('signup');
@@ -64,6 +66,7 @@ class ProductController extends Controller
 
         return redirect('/')->with('success', 'Registration successful. You can now login.');
     }
+
     public function datatables(Request $request)
     {
         $query = Products::select(['id', 'name', 'qty', 'price', 'description']);
@@ -81,7 +84,7 @@ class ProductController extends Controller
     {
         return view('products.create');
     }
-
+    
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -100,11 +103,13 @@ class ProductController extends Controller
     {
         return view('products.edit', ['product' => $product]);
     }
+
     public function editProfile()
     {
         $user = Auth::user();
         return view('profile.editprofile', ['user' => $user]);
     }
+
     public function update(Products $product, Request $request)
     {
         $data = $request->validate([
@@ -127,14 +132,14 @@ class ProductController extends Controller
             'address' => 'required',
             'mobile_number' => 'required|numeric',
             'description' => 'nullable',
-            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'picture' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
         if ($request->hasFile('picture')) {
             $picturePath = $request->file('picture')->store('pictures', 'public');
             $data['pfp'] = $picturePath;
         }
         $user->update($data);
-        return redirect()->route('user.profile')->with('Success', 'Product Updated!');
+        return redirect()->route('user.profile')->with('success', 'Product Updated!');
     }
 
     public function logout()
