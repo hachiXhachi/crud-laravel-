@@ -12,6 +12,7 @@ Route::post('/signup', [ProductController::class, 'register'])->name('user.regis
 Route::post('/', [ProductController::class, 'verify'])->name('user.verify');
 Route::post('/logout', [ProductController::class, 'logout'])->name('logout');
 Route::middleware([middleware::class])->group(function () {
+    Route::get('/dashboard', [ProductController::class, 'dashboard1'])->name('user.dashboard');
     Route::get('/profile/{id}/edit', [ProductController::class, 'editProfile'])->name('user.edit');
     Route::put('/profile/{user}/update', [ProductController::class, 'storeProfile'])->name('user.update');
     Route::get('/profile', [ProductController::class, 'profile'])->name('user.profile');

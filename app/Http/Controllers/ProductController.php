@@ -37,7 +37,7 @@ class ProductController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('product');
+            return redirect()->intended('dashboard');
         }
 
         return back()->withErrors([
@@ -83,6 +83,10 @@ class ProductController extends Controller
     public function create()
     {
         return view('products.create');
+    }
+    public function dashboard1()
+    {
+        return view('dashboard');
     }
     
     public function store(Request $request)
