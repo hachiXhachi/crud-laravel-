@@ -6,8 +6,9 @@
 <script src="{{asset('assets/js/plugins/perfect-scrollbar.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/smooth-scrollbar.min.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/plugins/bootstrap-notify.js')}}" type="text/javascript"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.13.3/js/standalone/selectize.min.js"></script>
 <script src="https://kit.fontawesome.com/42d5adcbca.js" type="text/javascript" crossorigin="anonymous"></script>
+<script src="{{asset('assets/js/plugins/chartjs.min.js')}}"></script>
 
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js" type="text/javascript"></script>

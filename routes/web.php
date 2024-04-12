@@ -22,4 +22,5 @@ Route::middleware([middleware::class])->group(function () {
     Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
     Route::get('/product/datatables', [ProductController::class, 'datatables'])->name('product.datatables');
     Route::put('/product/{product}/update', [ProductController::class, 'update'])->name('product.update');
+    Route::get('/product/category', [ProductController::class, 'category'])->name('product.category');
 });

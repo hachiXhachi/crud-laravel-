@@ -12,6 +12,7 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "bootstrap-select": "^1.13.18",
         "kit": "^0.1.2",
         "mdb": "^0.1.0",
         "mdbootstrap": "^4.20.0",

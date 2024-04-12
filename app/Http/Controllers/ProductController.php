@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\User;
+use App\Models\Category;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
@@ -82,8 +83,15 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('products.create');
+        $categories = Category::all();
+        return view('products.create', compact('categories')) ;
     }
+
+    public function category()
+    {
+        return view('products.add_category');
+    }
+    
     public function dashboard1()
     {
         return view('dashboard');
@@ -95,6 +103,7 @@ class ProductController extends Controller
             'name' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|numeric',
+            'category' => 'required',
             'description' => 'nullable'
         ]);
 
@@ -120,6 +129,7 @@ class ProductController extends Controller
             'name' => 'required',
             'qty' => 'required|numeric',
             'price' => 'required|numeric',
+            'category' => 'required',
             'description' => 'nullable'
         ]);
 

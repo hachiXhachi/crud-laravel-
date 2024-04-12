@@ -82,7 +82,6 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-
             <li class="nav-item d-flex align-items-center">
               <a href="{{route('product.create')}}" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa-regular fa-square-plus"></i>
@@ -91,6 +90,12 @@
             </li>
           </ul>
         </div>
+        <li class="nav-item d-flex align-items-center">
+            <a href="" class="nav-link text-body font-weight-bold px-0" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <i class="fa-regular fa-square-plus"></i>
+                <span class="d-sm-inline d-none">Add Category</span>
+              </a>
+            </li>
       </div>
     </nav>
     <!-- End Navbar -->
@@ -155,6 +160,28 @@
     </div>
   </main>
 
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="input-group input-group-outline mb-3">
+              <label class="form-label">Name</label>
+              <input type="text" name="category_name" class="form-control">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <!--   Core JS Files   -->
   @include('fragments.js.js')
   <script>
@@ -277,6 +304,11 @@
         damping: '0.5'
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+
+    function add_category() {
+
+
     }
   </script>
 </body>
